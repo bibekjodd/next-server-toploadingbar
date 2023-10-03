@@ -11,12 +11,12 @@ const navItems: { title: string; href: string }[] = [
 export default function Navbar() {
   return (
     <div>
-      <header className="flex items-center page-container">
+      <header className="flex items-center page-container py-3 mb-12">
         <ProgressLink
           href="/"
           className="mr-auto px-6 py-2 text-xl font-semibold"
         >
-          {"<TopLoadingBar/>"}
+          {"<TopLoadingBar />"}
         </ProgressLink>
 
         <nav className="flex space-x-7">
