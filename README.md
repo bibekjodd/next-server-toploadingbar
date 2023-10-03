@@ -1,34 +1,107 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## React Top Loading Bar On Server Component
 
-## Getting Started
+NextJS does not allow use of useRouter() and events on Next App Router.
+We can use custom components to create our custom loadingbar on route change.
 
-First, run the development server:
+## Progress Link
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+```ts
+"use client";
+import useLoadingBar from "@/hooks/useLoadingBar";
+import Link, { LinkProps } from "next/link";
+import React, { AnchorHTMLAttributes } from "react";
+
+type Props = LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>;
+
+export default function ProgressLink({
+  children,
+  href,
+  onClick,
+  ...props
+}: Props) {
+  const start = useLoadingBar((state) => state.start);
+  const end = useLoadingBar((state) => state.end);
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) {
+      onClick(e);
+    }
+
+    if (href === location.pathname + location.search) {
+      end();
+    } else {
+      start();
+    }
+  };
+
+  return (
+    <Link {...props} href={href} onClick={handleClick}>
+      {children}
+    </Link>
+  );
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Progress Button
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```ts
+"use client";
+import useLoadingBar from "@/hooks/useLoadingBar";
+import { useRouter } from "next/navigation";
+import React, { ButtonHTMLAttributes } from "react";
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+type Props = { href: string } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-## Learn More
+export default function ProgressButton({
+  children,
+  onClick,
+  href,
+  ...props
+}: Props) {
+  const start = useLoadingBar((state) => state.start);
+  const end = useLoadingBar((state) => state.end);
+  const router = useRouter();
 
-To learn more about Next.js, take a look at the following resources:
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClick) {
+      onClick(e);
+    }
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+    if (location.pathname + location.search === href) {
+      end();
+    } else {
+      router.push(href);
+      start();
+    }
+  };
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  return (
+    <button onClick={handleClick} {...props}>
+      {children}
+    </button>
+  );
+}
+```
 
-## Deploy on Vercel
+## State Management for ProgressBar
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+import { create } from "zustand";
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+interface UseLoadingBar {
+  progress: number;
+  start: () => void;
+  end: () => void;
+}
+
+const useLoadingBar = create<UseLoadingBar>((set) => ({
+  progress: 0,
+  start() {
+    set({ progress: 90 });
+  },
+  end() {
+    set({ progress: 100 });
+  },
+}));
+export default useLoadingBar;
+```

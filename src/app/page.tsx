@@ -1,7 +1,7 @@
 import wait from "@/lib/wait";
 import React from "react";
 import ProgressButton from "@/components/ProgressButton";
-import NavigatorClient from "./space/NavigatorClient";
+import NavigatorClient from "../components/NavigatorClient";
 
 export default async function Space() {
   await wait(1000);
