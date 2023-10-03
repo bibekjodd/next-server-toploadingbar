@@ -11,15 +11,14 @@ const navItems: { title: string; href: string }[] = [
 export default function Navbar() {
   return (
     <div>
-      <header className="flex items-center page-container py-3 mb-12">
-        <ProgressLink
-          href="/"
-          className="mr-auto px-6 py-2 text-xl font-semibold"
-        >
-          {"<TopLoadingBar />"}
+      <header className="page-container flex flex-col md:flex-row items-start space-y-5 md:space-y-0 md:items-center  md:justify-between py-3 mb-12 ">
+        <ProgressLink href="/" className="px-6 py-2 text-xl font-bold">
+          <span className="">{"<"}</span>
+          <span className="text-rose-500">TopLoadingBar</span>
+          <span className="text-blue-600">{" />"}</span>
         </ProgressLink>
 
-        <nav className="flex space-x-7">
+        <nav className="flex md:space-x-7">
           {navItems.map(({ href, title }) => (
             <ProgressLink key={title} href={href} className="px-4 py-2">
               {title}
