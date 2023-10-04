@@ -3,6 +3,69 @@
 NextJS does not allow use of useRouter() and events on Next App Router.
 We can use custom components to create our custom loadingbar on route change.
 
+## Server Component
+
+```ts
+import ProgressLink from "@/components/ProgressLink";
+import React from "react";
+
+export default async function page() {
+  await fetch("...");
+  return (
+    <div>
+      <ProgressLink href="/profile">Go to Profile</ProgressLink>
+    </div>
+  );
+}
+```
+
+## TopLoadingBar
+
+```ts
+"use client";
+import useLoadingBar from "@/hooks/useLoadingBar";
+import { usePathname, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
+import LoadingBar from "react-top-loading-bar";
+
+export default function TopLoadingBar() {
+  const progress = useLoadingBar((state) => state.progress);
+  const end = useLoadingBar((state) => state.end);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    end();
+  }, [pathname, searchParams, end]);
+
+  return <LoadingBar progress={progress} waitingTime={200} />;
+}
+```
+
+## Layout
+
+```ts
+import Navbar from "@/components/Navbar";
+import "./globals.css";
+import TopLoadingBar from "@/components/TopLoadingBar";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>
+        <TopLoadingBar />
+        <Navbar />
+        <main className="page-container">{children}</main>
+      </body>
+    </html>
+  );
+}
+```
+
 ## Progress Link
 
 ```ts

@@ -9,15 +9,14 @@ export default function NavigatorClient() {
   const [query, setQuery] = useState("apple");
 
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * randomQueries.length);
-    if (query !== randomQueries[randomIndex]) {
-      setQuery(randomQueries[randomIndex]);
-      return;
+    let randomIndex = Math.floor(Math.random() * randomQueries.length);
+    if (query === randomQueries[randomIndex]) {
+      randomIndex++;
+      if (randomIndex === randomQueries.length) {
+        randomIndex = 0;
+      }
     }
-
-    if (randomIndex === 0 || randomIndex === randomQueries.length - 1) {
-      setQuery("air");
-    }
+    setQuery(randomQueries[randomIndex]);
   }, [searchParams]);
 
   return (

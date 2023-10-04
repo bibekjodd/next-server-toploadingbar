@@ -5,7 +5,8 @@ import React, { useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
 
 export default function TopLoadingBar() {
-  const [progress, end] = useLoadingBar((state) => [state.progress, state.end]);
+  const progress = useLoadingBar((state) => state.progress);
+  const end = useLoadingBar((state) => state.end);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
