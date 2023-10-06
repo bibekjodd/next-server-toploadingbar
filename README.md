@@ -31,12 +31,15 @@ import LoadingBar from "react-top-loading-bar";
 export default function TopLoadingBar() {
   const progress = useLoadingBar((state) => state.progress);
   const end = useLoadingBar((state) => state.end);
+  const initial = useLoadingBar((state) => state.initial);
+  const initialLoaded = useLoadingBar((state) => state.initialLoaded);
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    end();
-  }, [pathname, searchParams, end]);
+    if (initial) initialLoaded();
+    else end();
+  }, [pathname, searchParams]);
 
   return <LoadingBar progress={progress} waitingTime={200} />;
 }
@@ -152,13 +155,21 @@ export default function ProgressButton({
 import { create } from "zustand";
 
 interface UseLoadingBar {
+  initial: boolean;
   progress: number;
+
+  initialLoaded: () => void;
   start: () => void;
   end: () => void;
 }
 
 const useLoadingBar = create<UseLoadingBar>((set) => ({
   progress: 0,
+  initial: true,
+
+  initialLoaded() {
+    set({ initial: false });
+  },
   start() {
     set({ progress: 90 });
   },
