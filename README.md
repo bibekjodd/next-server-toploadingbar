@@ -19,18 +19,18 @@ export default async function page() {
 }
 ```
 
-## TopLoadingBar
+## LoadingBar
 
 ```ts
 "use client";
 import useLoadingBar from "@/hooks/useLoadingBar";
 import { usePathname, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
-import LoadingBar from "react-top-loading-bar";
+import TopLoadingBar from "react-top-loading-bar";
 
-export default function TopLoadingBar() {
+export default function LoadingBar() {
   const progress = useLoadingBar((state) => state.progress);
-  const end = useLoadingBar((state) => state.end);
+  const finish = useLoadingBar((state) => state.finish);
   const initial = useLoadingBar((state) => state.initial);
   const initialLoaded = useLoadingBar((state) => state.initialLoaded);
   const pathname = usePathname();
@@ -38,10 +38,10 @@ export default function TopLoadingBar() {
 
   useEffect(() => {
     if (initial) initialLoaded();
-    else end();
+    else finish();
   }, [pathname, searchParams]);
 
-  return <LoadingBar progress={progress} waitingTime={200} />;
+  return <TopLoadingBar progress={progress} waitingTime={200} />;
 }
 ```
 
@@ -50,7 +50,15 @@ export default function TopLoadingBar() {
 ```ts
 import Navbar from "@/components/Navbar";
 import "./globals.css";
-import TopLoadingBar from "@/components/TopLoadingBar";
+import { Inter } from "next/font/google";
+import LoadingBar from "@/components/LoadingBar";
+
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata = {
+  title: "Next Top Loading Bar",
+  description: "Top Loading Bar on Next Server Component",
+};
 
 export default function RootLayout({
   children,
@@ -59,8 +67,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-        <TopLoadingBar />
+      <body className={inter.className}>
+        <LoadingBar />
         <Navbar />
         <main className="page-container">{children}</main>
       </body>
@@ -86,7 +94,7 @@ export default function ProgressLink({
   ...props
 }: Props) {
   const start = useLoadingBar((state) => state.start);
-  const end = useLoadingBar((state) => state.end);
+  const finish = useLoadingBar((state) => state.finish);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClick) {
@@ -94,7 +102,7 @@ export default function ProgressLink({
     }
 
     if (href === location.pathname + location.search) {
-      end();
+      finish();
     } else {
       start();
     }
@@ -125,7 +133,7 @@ export default function ProgressButton({
   ...props
 }: Props) {
   const start = useLoadingBar((state) => state.start);
-  const end = useLoadingBar((state) => state.end);
+  const finish = useLoadingBar((state) => state.finish);
   const router = useRouter();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -134,7 +142,7 @@ export default function ProgressButton({
     }
 
     if (location.pathname + location.search === href) {
-      end();
+      finish();
     } else {
       router.push(href);
       start();
@@ -160,7 +168,7 @@ interface UseLoadingBar {
 
   initialLoaded: () => void;
   start: () => void;
-  end: () => void;
+  finish: () => void;
 }
 
 const useLoadingBar = create<UseLoadingBar>((set) => ({
@@ -173,7 +181,7 @@ const useLoadingBar = create<UseLoadingBar>((set) => ({
   start() {
     set({ progress: 90 });
   },
-  end() {
+  finish() {
     set({ progress: 100 });
   },
 }));

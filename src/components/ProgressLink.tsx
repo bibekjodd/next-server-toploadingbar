@@ -12,7 +12,7 @@ export default function ProgressLink({
   ...props
 }: Props) {
   const start = useLoadingBar((state) => state.start);
-  const end = useLoadingBar((state) => state.end);
+  const finish = useLoadingBar((state) => state.finish);
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (onClick) {
@@ -20,7 +20,7 @@ export default function ProgressLink({
     }
 
     if (href === location.pathname + location.search) {
-      end();
+      finish();
     } else {
       start();
     }

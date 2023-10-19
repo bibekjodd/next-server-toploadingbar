@@ -2,11 +2,11 @@
 import useLoadingBar from "@/hooks/useLoadingBar";
 import { usePathname, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
-import LoadingBar from "react-top-loading-bar";
+import TopLoadingBar from "react-top-loading-bar";
 
-export default function TopLoadingBar() {
+export default function LoadingBar() {
   const progress = useLoadingBar((state) => state.progress);
-  const end = useLoadingBar((state) => state.end);
+  const finish = useLoadingBar((state) => state.finish);
   const initial = useLoadingBar((state) => state.initial);
   const initialLoaded = useLoadingBar((state) => state.initialLoaded);
   const pathname = usePathname();
@@ -14,8 +14,8 @@ export default function TopLoadingBar() {
 
   useEffect(() => {
     if (initial) initialLoaded();
-    else end();
+    else finish();
   }, [pathname, searchParams]);
 
-  return <LoadingBar progress={progress} waitingTime={200} />;
+  return <TopLoadingBar progress={progress} waitingTime={200} />;
 }

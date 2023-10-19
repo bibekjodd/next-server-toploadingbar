@@ -6,7 +6,7 @@ interface UseLoadingBar {
 
   initialLoaded: () => void;
   start: () => void;
-  end: () => void;
+  finish: () => void;
 }
 
 const useLoadingBar = create<UseLoadingBar>((set) => ({
@@ -19,7 +19,7 @@ const useLoadingBar = create<UseLoadingBar>((set) => ({
   start() {
     set({ progress: 90 });
   },
-  end() {
+  finish() {
     set({ progress: 100 });
   },
 }));

@@ -12,7 +12,7 @@ export default function ProgressButton({
   ...props
 }: Props) {
   const start = useLoadingBar((state) => state.start);
-  const end = useLoadingBar((state) => state.end);
+  const finish = useLoadingBar((state) => state.finish);
   const router = useRouter();
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -21,7 +21,7 @@ export default function ProgressButton({
     }
 
     if (location.pathname + location.search === href) {
-      end();
+      finish();
     } else {
       router.push(href);
       start();
