@@ -5,7 +5,8 @@ interface UseLoadingBar {
   progress: number;
 
   initialLoaded: () => void;
-  start: () => void;
+  // return `true` if animation can start else `false`
+  start: (url?: string) => boolean;
   finish: () => void;
 }
 
@@ -16,9 +17,14 @@ const useLoadingBar = create<UseLoadingBar>((set) => ({
   initialLoaded() {
     set({ initial: false });
   },
-  start() {
+
+  start(url) {
+    const currentURL = location.pathname + location.search;
+    if (currentURL === url) return false;
     set({ progress: 90 });
+    return true;
   },
+
   finish() {
     set({ progress: 100 });
   },
