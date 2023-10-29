@@ -1,5 +1,5 @@
 import React from 'react';
-import ProgressLink from './ProgressLink';
+import ProgressLink from './progress-link';
 
 const navItems: { title: string; href: string }[] = [
   { title: 'Home', href: '/' },

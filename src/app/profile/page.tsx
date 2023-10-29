@@ -1,4 +1,4 @@
-import ProgressButton from '@/components/ProgressButton';
+import ProgressButton from '@/components/progress-button';
 import React from 'react';
 
 export default function Profile() {

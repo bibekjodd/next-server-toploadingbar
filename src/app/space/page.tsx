@@ -1,4 +1,4 @@
-import ProgressButton from '@/components/ProgressButton';
+import ProgressButton from '@/components/progress-button';
 import wait from '@/lib/wait';
 import React from 'react';
 

@@ -1,5 +1,5 @@
 'use client';
-import ProgressButton from '@/components/ProgressButton';
+import ProgressButton from '@/components/progress-button';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 const randomQueries = ['apple', 'dog', 'node_modules', 'everest'];
