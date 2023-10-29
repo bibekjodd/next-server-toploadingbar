@@ -6,12 +6,12 @@ import NavigatorClient from "../components/NavigatorClient";
 export default async function Space() {
   await wait(1000);
   return (
-    <div className="flex items-center flex-col">
+    <div className="flex flex-col items-center">
       <p className="text-lg font-bold">TopLoadingBar on Server Component</p>
       <NavigatorClient />
       <ProgressButton
         href="/"
-        className=" bg-rose-500 px-6 py-2.5 rounded-lg font-semibold active:scale-90 transition-all"
+        className=" rounded-lg bg-rose-500 px-6 py-2.5 font-semibold transition-all active:scale-90"
       >
         Clear Queries
       </ProgressButton>

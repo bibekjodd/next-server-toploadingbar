@@ -22,7 +22,7 @@ export default function NavigatorClient() {
   return (
     <ProgressButton
       href={`/?search=${query}`}
-      className="my-10 bg-rose-500 px-6 py-2.5 rounded-lg font-semibold active:scale-90 transition-all"
+      className="my-10 rounded-lg bg-rose-500 px-6 py-2.5 font-semibold transition-all active:scale-90"
     >
       Navigate to Random Page Query
     </ProgressButton>

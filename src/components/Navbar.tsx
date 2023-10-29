@@ -11,7 +11,7 @@ const navItems: { title: string; href: string }[] = [
 export default function Navbar() {
   return (
     <div>
-      <header className="page-container flex flex-col md:flex-row items-start space-y-5 md:space-y-0 md:items-center  md:justify-between py-3 mb-12 ">
+      <header className="page-container mb-12 flex flex-col items-start space-y-5 py-3 md:flex-row  md:items-center md:justify-between md:space-y-0 ">
         <ProgressLink href="/" className="px-6 py-2 text-xl font-bold">
           <span className="">{"<"}</span>
           <span className="text-rose-500">TopLoadingBar</span>
