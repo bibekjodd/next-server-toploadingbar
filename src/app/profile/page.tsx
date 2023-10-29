@@ -1,5 +1,5 @@
-import ProgressButton from "@/components/ProgressButton";
-import React from "react";
+import ProgressButton from '@/components/ProgressButton';
+import React from 'react';
 
 export default function Profile() {
   return (

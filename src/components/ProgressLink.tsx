@@ -1,7 +1,7 @@
-"use client";
-import useLoadingBar from "@/hooks/useLoadingBar";
-import Link, { LinkProps } from "next/link";
-import React, { AnchorHTMLAttributes } from "react";
+'use client';
+import useLoadingBar from '@/hooks/useLoadingBar';
+import Link, { LinkProps } from 'next/link';
+import React, { AnchorHTMLAttributes } from 'react';
 
 type Props = LinkProps & AnchorHTMLAttributes<HTMLAnchorElement>;
 

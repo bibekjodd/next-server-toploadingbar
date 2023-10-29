@@ -1,8 +1,8 @@
-"use client";
-import useLoadingBar from "@/hooks/useLoadingBar";
-import { usePathname, useSearchParams } from "next/navigation";
-import React, { useEffect } from "react";
-import TopLoadingBar from "react-top-loading-bar";
+'use client';
+import useLoadingBar from '@/hooks/useLoadingBar';
+import { usePathname, useSearchParams } from 'next/navigation';
+import React, { useEffect } from 'react';
+import TopLoadingBar from 'react-top-loading-bar';
 
 export default function LoadingBar() {
   const progress = useLoadingBar((state) => state.progress);

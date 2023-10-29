@@ -1,7 +1,7 @@
-"use client";
-import useLoadingBar from "@/hooks/useLoadingBar";
-import { useRouter } from "next/navigation";
-import React, { ButtonHTMLAttributes } from "react";
+'use client';
+import useLoadingBar from '@/hooks/useLoadingBar';
+import { useRouter } from 'next/navigation';
+import React, { ButtonHTMLAttributes } from 'react';
 
 type Props = { href: string } & ButtonHTMLAttributes<HTMLButtonElement>;
 

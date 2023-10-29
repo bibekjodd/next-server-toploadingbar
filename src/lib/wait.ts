@@ -1,7 +1,7 @@
 const wait = (timeout?: number) => {
   return new Promise((res) => {
     setTimeout(() => {
-      res("okay");
+      res('okay');
     }, timeout || 1000);
   });
 };

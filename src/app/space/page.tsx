@@ -1,6 +1,6 @@
-import ProgressButton from "@/components/ProgressButton";
-import wait from "@/lib/wait";
-import React from "react";
+import ProgressButton from '@/components/ProgressButton';
+import wait from '@/lib/wait';
+import React from 'react';
 
 export default async function Page() {
   await wait();

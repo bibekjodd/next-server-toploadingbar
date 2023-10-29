@@ -1,12 +1,12 @@
-"use client";
-import ProgressButton from "@/components/ProgressButton";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-const randomQueries = ["apple", "dog", "node_modules", "everest"];
+'use client';
+import ProgressButton from '@/components/ProgressButton';
+import { useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+const randomQueries = ['apple', 'dog', 'node_modules', 'everest'];
 
 export default function NavigatorClient() {
   const searchParams = useSearchParams();
-  const [query, setQuery] = useState("apple");
+  const [query, setQuery] = useState('apple');
 
   useEffect(() => {
     let randomIndex = Math.floor(Math.random() * randomQueries.length);

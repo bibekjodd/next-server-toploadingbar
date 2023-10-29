@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 interface UseLoadingBar {
   initial: boolean;
@@ -27,6 +27,6 @@ const useLoadingBar = create<UseLoadingBar>((set) => ({
 
   finish() {
     set({ progress: 100 });
-  },
+  }
 }));
 export default useLoadingBar;
